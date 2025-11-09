@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HipStar Viewer</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="ui">
+<label>日時: <input type="datetime-local" id="datetime"></label>
+<label>緯度: <input type="number" id="lat" step="0.01" value="35.68"></label>
+<label>経度: <input type="number" id="lon" step="0.01" value="139.76"></label>
+<button id="nowBtn">現在時刻</button>
+<button id="loadBtn">読み込み & 描画</button>
+<div style="margin-top:6px">Vmag上限:
+<select id="magLimit"><option>2</option><option>4</option><option selected>6</option><option>8</option></select>
+</div>
+</div>
+<canvas id="canvas"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.156.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/astronomy-engine@2.1.19/astronomy.browser.min.js"></script>
+<script src="main.js"></script>
+</body>
+</html>

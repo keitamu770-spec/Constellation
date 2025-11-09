@@ -1,0 +1,4 @@
+
+body{margin:0;background:radial-gradient(circle at 50% 20%, #001022 0%, #000 40%, #000 100%);color:#fff;font-family:Arial, sans-serif}
+#ui{position:fixed;left:8px;top:8px;z-index:20;background:rgba(0,0,0,0.6);padding:10px;border-radius:8px}
+canvas{width:100vw;height:100vh;display:block}
