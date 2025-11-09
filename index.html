@@ -1,42 +1,132 @@
 <!doctype html>
 <html lang="ja">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>星座早見表（完全版サンプル）</title>
-  <link rel="stylesheet" href="styles/style.css">
-  <!-- astronomy-engine ブラウザ向けビルドを CDN から読み込み -->
-  <script src="https://cdn.jsdelivr.net/npm/astronomy-engine@2.1.19/astronomy.browser.min.js"></script>
-</head>
-<body>
-  <header>
-    <h1>星座早見表（完全版サンプル）</h1>
-    <div class="controls">
-      <label>日時
-        <input id="datetime" type="datetime-local">
-      </label>
-      <button id="nowBtn">現在時刻</button>
-      <button id="locBtn">現在位置取得</button>
-      <label>緯度 <input id="lat" type="number" step="0.01" value="35.68"></label>
-      <label>経度 <input id="lon" type="number" step="0.01" value="139.76"></label>
-      <label>高度(m) <input id="height" type="number" step="1" value="30"></label>
-      <button id="generate">再描画</button>
-      <span id="status" class="status"></span>
-    </div>
-  </header>
-
-  <main>
-    <div id="sky-wrap">
-      <canvas id="sky" width="800" height="800"></canvas>
-      <div id="legend">
-        <div><span class="dot tiny"></span>暗い星</div>
-        <div><span class="dot medium"></span>中等星</div>
-        <div><span class="dot large"></span>明るい星・惑星</div>
-      </div>
-    </div>
-    <p id="locInfo"></p>
-  </main>
-
-  <script src="scripts/main.js"></script>
+<head><meta charset="utf-8"><title>Hipparcos Improved Demo</title><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;background:#000;color:#fff;font-family:Arial">
+<div id="ui" style="position:fixed;left:8px;top:8px;z-index:20;background:rgba(0,0,0,0.5);padding:8px;border-radius:6px">
+<label>日時: <input type="datetime-local" id="datetime"></label>
+<label>緯度: <input type="number" id="lat" step="0.01" value="35.68"></label>
+<label>経度: <input type="number" id="lon" step="0.01" value="139.76"></label>
+<button id="nowBtn">現在時刻</button>
+<button id="loadBtn">読み込み & 描画</button>
+<div style="font-size:12px;color:#ccc;margin-top:6px">Vmag上限: <select id="magLimit"><option>2</option><option>4</option><option selected>6</option><option>8</option></select></div>
+</div>
+<canvas id="canvas" style="width:100vw;height:100vh;display:block"></canvas>
+<script src="https://cdn.jsdelivr.net/npm/three@0.156.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/astronomy-engine@2.1.19/astronomy.browser.min.js"></script>
+<script>
+const canvas = document.getElementById('canvas');
+const renderer = new THREE.WebGLRenderer({canvas,antialias:true});
+renderer.setSize(window.innerWidth, window.innerHeight);
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(60, window.innerWidth/window.innerHeight, 0.01, 10);
+camera.position.z = 1.2;
+scene.add(new THREE.AmbientLight(0xffffff,0.9));
+let tileIndex=[], tilesCache={}, pointsObj=null, lineGroup=null;
+async function loadIndex(){ tileIndex = await (await fetch('tile_index.json')).json(); console.log('Tile index', tileIndex.length); }
+function datetimeNowInput(){ const now=new Date(); document.getElementById('datetime').value = new Date(now.getTime() - now.getTimezoneOffset()*60000).toISOString().slice(0,16); }
+datetimeNowInput();
+window.addEventListener('resize', ()=>{ renderer.setSize(window.innerWidth, window.innerHeight); camera.aspect = window.innerWidth/window.innerHeight; camera.updateProjectionMatrix(); });
+function raDecToVector(ra_hours, dec_deg){ const ra=ra_hours*Math.PI/12.0; const dec=dec_deg*Math.PI/180.0; return [Math.cos(dec)*Math.cos(ra), Math.cos(dec)*Math.sin(ra), Math.sin(dec)]; }
+async function loadTilesForMag(limitMag){
+  const selected = tileIndex.filter(t => t.mag_max <= limitMag);
+  const combined=[];
+  for(const t of selected){
+    if(tilesCache[t.file]){ combined.push(...tilesCache[t.file]); continue; }
+    const arr = await (await fetch(t.file)).json();
+    tilesCache[t.file]=arr;
+    combined.push(...arr);
+  }
+  console.log('Loaded stars:', combined.length);
+  return combined;
+}
+function applyRotationAndFilter(stars, date, lat, lon){
+  const obs = new Astronomy.Observer(lat, lon, 0);
+  const time = Astronomy.Time(date);
+  const rot = Astronomy.Rotation_EQJ_HOR(time, obs);
+  const visible=[];
+  for(const s of stars){
+    const vec = {x:s.x,y:s.y,z:s.z};
+    const vhor = Astronomy.RotateVector(rot, vec);
+    const hor = Astronomy.HorizonFromVector(vhor, 'normal');
+    if(hor.altitude>0) visible.push({vhor:vhor, star:s, az:hor.azimuth, alt:hor.altitude});
+  }
+  return visible;
+}
+function buildPointCloud(visibleStars){
+  const n=visibleStars.length;
+  const positions=new Float32Array(n*3);
+  const sizes=new Float32Array(n);
+  for(let i=0;i<n;i++){
+    const vh=visibleStars[i].vhor;
+    positions[i*3+0]=vh.x; positions[i*3+1]=vh.y; positions[i*3+2]=vh.z;
+    const mag = visibleStars[i].star.mag;
+    sizes[i]=Math.max(0.4,6.0-mag);
+  }
+  const geom=new THREE.BufferGeometry();
+  geom.setAttribute('position', new THREE.BufferAttribute(positions,3));
+  geom.setAttribute('size', new THREE.BufferAttribute(sizes,1));
+  const material=new THREE.ShaderMaterial({
+    uniforms:{color:{value:new THREE.Color(0xffffff)}},
+    vertexShader:`attribute float size; varying float vSize; void main(){ vSize=size; vec4 mvPosition = modelViewMatrix * vec4(position,1.0); gl_PointSize = size * (300.0 / -mvPosition.z); gl_Position = projectionMatrix * mvPosition; }`,
+    fragmentShader:`uniform vec3 color; varying float vSize; void main(){ float r=length(gl_PointCoord-vec2(0.5)); if(r>0.5) discard; gl_FragColor = vec4(color,1.0); }`,
+    transparent:true, depthWrite:false
+  });
+  if(pointsObj) scene.remove(pointsObj);
+  pointsObj=new THREE.Points(geom, material);
+  scene.add(pointsObj);
+}
+async function drawConstellations(date, lat, lon){
+  const cons = await (await fetch('constellations.json')).json();
+  if(lineGroup){ scene.remove(lineGroup); lineGroup=null; }
+  lineGroup = new THREE.Group();
+  const rot = Astronomy.Rotation_EQJ_HOR(Astronomy.Time(date), new Astronomy.Observer(lat, lon, 0));
+  for(const c of cons){
+    const pts=[];
+    for(const s of c.stars){
+      const vec = raDecToVector(s.ra_hours, s.dec_deg);
+      const vhor = Astronomy.RotateVector(rot, {x:vec[0], y:vec[1], z:vec[2]});
+      const hor = Astronomy.HorizonFromVector(vhor, 'normal');
+      if(hor.altitude>0) pts.push(new THREE.Vector3(vhor.x, vhor.y, vhor.z)); else pts.push(null);
+    }
+    const mat = new THREE.LineBasicMaterial({color:0x88ccff, linewidth:1});
+    for(const ln of c.lines){
+      const a=pts[ln[0]], b=pts[ln[1]];
+      if(a && b){ const geom = new THREE.BufferGeometry().setFromPoints([a,b]); const line=new THREE.Line(geom, mat); lineGroup.add(line); }
+    }
+    const vis = pts.filter(p=>p!==null);
+    if(vis.length>0){
+      const cx = vis.reduce((s,p)=>s+p.x,0)/vis.length;
+      const cy = vis.reduce((s,p)=>s+p.y,0)/vis.length;
+      const cz = vis.reduce((s,p)=>s+p.z,0)/vis.length;
+      const sprite = makeTextSprite(c.name);
+      sprite.position.set(cx,cy,cz);
+      lineGroup.add(sprite);
+    }
+  }
+  scene.add(lineGroup);
+}
+function makeTextSprite(message){
+  const canvas=document.createElement('canvas'); const size=256; canvas.width=size; canvas.height=size;
+  const ctx=canvas.getContext('2d'); ctx.fillStyle='rgba(255,240,200,0.95)'; ctx.font='24px sans-serif'; ctx.textAlign='center'; ctx.fillText(message,size/2,size/2+8);
+  const texture=new THREE.CanvasTexture(canvas); texture.needsUpdate=true;
+  const mat=new THREE.SpriteMaterial({map:texture, depthTest:false}); const sprite=new THREE.Sprite(mat); sprite.scale.set(0.2,0.1,1); return sprite;
+}
+async function renderForInputs(){
+  const dateStr=document.getElementById('datetime').value; const date = dateStr?new Date(dateStr):new Date();
+  const lat=parseFloat(document.getElementById('lat').value)||35.68; const lon=parseFloat(document.getElementById('lon').value)||139.76;
+  const magLimit=parseFloat(document.getElementById('magLimit').value)||6;
+  document.getElementById('loadBtn').disabled=true;
+  const stars = await loadTilesForMag(magLimit);
+  const visible = applyRotationAndFilter(stars, date, lat, lon);
+  console.log('Visible after rotation filter:', visible.length);
+  buildPointCloud(visible);
+  await drawConstellations(date, lat, lon);
+  document.getElementById('loadBtn').disabled=false;
+}
+document.getElementById('nowBtn').addEventListener('click', ()=>{ datetimeNowInput(); });
+document.getElementById('loadBtn').addEventListener('click', ()=>{ renderForInputs(); });
+loadIndex();
+function animate(){ requestAnimationFrame(animate); renderer.render(scene, camera); } animate();
+</script>
 </body>
 </html>

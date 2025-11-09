@@ -1,0 +1,378 @@
+[
+  {
+    "file": "tiles/hip_dec-90_-75_mag2_4.json",
+    "dec_min": -90,
+    "dec_max": -75,
+    "mag_min": 2,
+    "mag_max": 4,
+    "count": 4
+  },
+  {
+    "file": "tiles/hip_dec-90_-75_mag4_6.json",
+    "dec_min": -90,
+    "dec_max": -75,
+    "mag_min": 4,
+    "mag_max": 6,
+    "count": 80
+  },
+  {
+    "file": "tiles/hip_dec-90_-75_mag6_8.json",
+    "dec_min": -90,
+    "dec_max": -75,
+    "mag_min": 6,
+    "mag_max": 8,
+    "count": 63
+  },
+  {
+    "file": "tiles/hip_dec-75_-60_mag-10_2.json",
+    "dec_min": -75,
+    "dec_max": -60,
+    "mag_min": -10,
+    "mag_max": 2,
+    "count": 6
+  },
+  {
+    "file": "tiles/hip_dec-75_-60_mag2_4.json",
+    "dec_min": -75,
+    "dec_max": -60,
+    "mag_min": 2,
+    "mag_max": 4,
+    "count": 36
+  },
+  {
+    "file": "tiles/hip_dec-75_-60_mag4_6.json",
+    "dec_min": -75,
+    "dec_max": -60,
+    "mag_min": 4,
+    "mag_max": 6,
+    "count": 280
+  },
+  {
+    "file": "tiles/hip_dec-75_-60_mag6_8.json",
+    "dec_min": -75,
+    "dec_max": -60,
+    "mag_min": 6,
+    "mag_max": 8,
+    "count": 246
+  },
+  {
+    "file": "tiles/hip_dec-60_-45_mag-10_2.json",
+    "dec_min": -60,
+    "dec_max": -45,
+    "mag_min": -10,
+    "mag_max": 2,
+    "count": 9
+  },
+  {
+    "file": "tiles/hip_dec-60_-45_mag2_4.json",
+    "dec_min": -60,
+    "dec_max": -45,
+    "mag_min": 2,
+    "mag_max": 4,
+    "count": 51
+  },
+  {
+    "file": "tiles/hip_dec-60_-45_mag4_6.json",
+    "dec_min": -60,
+    "dec_max": -45,
+    "mag_min": 4,
+    "mag_max": 6,
+    "count": 436
+  },
+  {
+    "file": "tiles/hip_dec-60_-45_mag6_8.json",
+    "dec_min": -60,
+    "dec_max": -45,
+    "mag_min": 6,
+    "mag_max": 8,
+    "count": 365
+  },
+  {
+    "file": "tiles/hip_dec-45_-30_mag-10_2.json",
+    "dec_min": -45,
+    "dec_max": -30,
+    "mag_min": -10,
+    "mag_max": 2,
+    "count": 3
+  },
+  {
+    "file": "tiles/hip_dec-45_-30_mag2_4.json",
+    "dec_min": -45,
+    "dec_max": -30,
+    "mag_min": 2,
+    "mag_max": 4,
+    "count": 58
+  },
+  {
+    "file": "tiles/hip_dec-45_-30_mag4_6.json",
+    "dec_min": -45,
+    "dec_max": -30,
+    "mag_min": 4,
+    "mag_max": 6,
+    "count": 514
+  },
+  {
+    "file": "tiles/hip_dec-45_-30_mag6_8.json",
+    "dec_min": -45,
+    "dec_max": -30,
+    "mag_min": 6,
+    "mag_max": 8,
+    "count": 443
+  },
+  {
+    "file": "tiles/hip_dec-30_-15_mag-10_2.json",
+    "dec_min": -30,
+    "dec_max": -15,
+    "mag_min": -10,
+    "mag_max": 2,
+    "count": 6
+  },
+  {
+    "file": "tiles/hip_dec-30_-15_mag2_4.json",
+    "dec_min": -30,
+    "dec_max": -15,
+    "mag_min": 2,
+    "mag_max": 4,
+    "count": 59
+  },
+  {
+    "file": "tiles/hip_dec-30_-15_mag4_6.json",
+    "dec_min": -30,
+    "dec_max": -15,
+    "mag_min": 4,
+    "mag_max": 6,
+    "count": 504
+  },
+  {
+    "file": "tiles/hip_dec-30_-15_mag6_8.json",
+    "dec_min": -30,
+    "dec_max": -15,
+    "mag_min": 6,
+    "mag_max": 8,
+    "count": 439
+  },
+  {
+    "file": "tiles/hip_dec-15_0_mag-10_2.json",
+    "dec_min": -15,
+    "dec_max": 0,
+    "mag_min": -10,
+    "mag_max": 2,
+    "count": 5
+  },
+  {
+    "file": "tiles/hip_dec-15_0_mag2_4.json",
+    "dec_min": -15,
+    "dec_max": 0,
+    "mag_min": 2,
+    "mag_max": 4,
+    "count": 49
+  },
+  {
+    "file": "tiles/hip_dec-15_0_mag4_6.json",
+    "dec_min": -15,
+    "dec_max": 0,
+    "mag_min": 4,
+    "mag_max": 6,
+    "count": 522
+  },
+  {
+    "file": "tiles/hip_dec-15_0_mag6_8.json",
+    "dec_min": -15,
+    "dec_max": 0,
+    "mag_min": 6,
+    "mag_max": 8,
+    "count": 439
+  },
+  {
+    "file": "tiles/hip_dec0_15_mag-10_2.json",
+    "dec_min": 0,
+    "dec_max": 15,
+    "mag_min": -10,
+    "mag_max": 2,
+    "count": 5
+  },
+  {
+    "file": "tiles/hip_dec0_15_mag2_4.json",
+    "dec_min": 0,
+    "dec_max": 15,
+    "mag_min": 2,
+    "mag_max": 4,
+    "count": 47
+  },
+  {
+    "file": "tiles/hip_dec0_15_mag4_6.json",
+    "dec_min": 0,
+    "dec_max": 15,
+    "mag_min": 4,
+    "mag_max": 6,
+    "count": 494
+  },
+  {
+    "file": "tiles/hip_dec0_15_mag6_8.json",
+    "dec_min": 0,
+    "dec_max": 15,
+    "mag_min": 6,
+    "mag_max": 8,
+    "count": 426
+  },
+  {
+    "file": "tiles/hip_dec15_30_mag-10_2.json",
+    "dec_min": 15,
+    "dec_max": 30,
+    "mag_min": -10,
+    "mag_max": 2,
+    "count": 5
+  },
+  {
+    "file": "tiles/hip_dec15_30_mag2_4.json",
+    "dec_min": 15,
+    "dec_max": 30,
+    "mag_min": 2,
+    "mag_max": 4,
+    "count": 56
+  },
+  {
+    "file": "tiles/hip_dec15_30_mag4_6.json",
+    "dec_min": 15,
+    "dec_max": 30,
+    "mag_min": 4,
+    "mag_max": 6,
+    "count": 538
+  },
+  {
+    "file": "tiles/hip_dec15_30_mag6_8.json",
+    "dec_min": 15,
+    "dec_max": 30,
+    "mag_min": 6,
+    "mag_max": 8,
+    "count": 443
+  },
+  {
+    "file": "tiles/hip_dec30_45_mag-10_2.json",
+    "dec_min": 30,
+    "dec_max": 45,
+    "mag_min": -10,
+    "mag_max": 2,
+    "count": 3
+  },
+  {
+    "file": "tiles/hip_dec30_45_mag2_4.json",
+    "dec_min": 30,
+    "dec_max": 45,
+    "mag_min": 2,
+    "mag_max": 4,
+    "count": 50
+  },
+  {
+    "file": "tiles/hip_dec30_45_mag4_6.json",
+    "dec_min": 30,
+    "dec_max": 45,
+    "mag_min": 4,
+    "mag_max": 6,
+    "count": 436
+  },
+  {
+    "file": "tiles/hip_dec30_45_mag6_8.json",
+    "dec_min": 30,
+    "dec_max": 45,
+    "mag_min": 6,
+    "mag_max": 8,
+    "count": 401
+  },
+  {
+    "file": "tiles/hip_dec45_60_mag-10_2.json",
+    "dec_min": 45,
+    "dec_max": 60,
+    "mag_min": -10,
+    "mag_max": 2,
+    "count": 5
+  },
+  {
+    "file": "tiles/hip_dec45_60_mag2_4.json",
+    "dec_min": 45,
+    "dec_max": 60,
+    "mag_min": 2,
+    "mag_max": 4,
+    "count": 36
+  },
+  {
+    "file": "tiles/hip_dec45_60_mag4_6.json",
+    "dec_min": 45,
+    "dec_max": 60,
+    "mag_min": 4,
+    "mag_max": 6,
+    "count": 384
+  },
+  {
+    "file": "tiles/hip_dec45_60_mag6_8.json",
+    "dec_min": 45,
+    "dec_max": 60,
+    "mag_min": 6,
+    "mag_max": 8,
+    "count": 364
+  },
+  {
+    "file": "tiles/hip_dec60_75_mag-10_2.json",
+    "dec_min": 60,
+    "dec_max": 75,
+    "mag_min": -10,
+    "mag_max": 2,
+    "count": 1
+  },
+  {
+    "file": "tiles/hip_dec60_75_mag2_4.json",
+    "dec_min": 60,
+    "dec_max": 75,
+    "mag_min": 2,
+    "mag_max": 4,
+    "count": 20
+  },
+  {
+    "file": "tiles/hip_dec60_75_mag4_6.json",
+    "dec_min": 60,
+    "dec_max": 75,
+    "mag_min": 4,
+    "mag_max": 6,
+    "count": 215
+  },
+  {
+    "file": "tiles/hip_dec60_75_mag6_8.json",
+    "dec_min": 60,
+    "dec_max": 75,
+    "mag_min": 6,
+    "mag_max": 8,
+    "count": 184
+  },
+  {
+    "file": "tiles/hip_dec75_90_mag-10_2.json",
+    "dec_min": 75,
+    "dec_max": 90,
+    "mag_min": -10,
+    "mag_max": 2,
+    "count": 1
+  },
+  {
+    "file": "tiles/hip_dec75_90_mag2_4.json",
+    "dec_min": 75,
+    "dec_max": 90,
+    "mag_min": 2,
+    "mag_max": 4,
+    "count": 1
+  },
+  {
+    "file": "tiles/hip_dec75_90_mag4_6.json",
+    "dec_min": 75,
+    "dec_max": 90,
+    "mag_min": 4,
+    "mag_max": 6,
+    "count": 76
+  },
+  {
+    "file": "tiles/hip_dec75_90_mag6_8.json",
+    "dec_min": 75,
+    "dec_max": 90,
+    "mag_min": 6,
+    "mag_max": 8,
+    "count": 66
+  }
+]

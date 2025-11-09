@@ -1,0 +1,142 @@
+[
+  {
+    "name": "Orion",
+    "stars": [
+      {
+        "id": "betelgeuse",
+        "ra_hours": 5.919529,
+        "dec_deg": 7.407064
+      },
+      {
+        "id": "rigel",
+        "ra_hours": 5.242298,
+        "dec_deg": -8.20164
+      },
+      {
+        "id": "bellatrix",
+        "ra_hours": 5.418863,
+        "dec_deg": 6.349723
+      },
+      {
+        "id": "mintaka",
+        "ra_hours": 5.533444,
+        "dec_deg": -0.299092
+      },
+      {
+        "id": "alnilam",
+        "ra_hours": 5.603702,
+        "dec_deg": -1.201919
+      },
+      {
+        "id": "alnitak",
+        "ra_hours": 5.679312,
+        "dec_deg": -1.942574
+      },
+      {
+        "id": "saiph",
+        "ra_hours": 5.585556,
+        "dec_deg": -9.669603
+      }
+    ],
+    "lines": [
+      [
+        0,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        5
+      ],
+      [
+        5,
+        6
+      ],
+      [
+        6,
+        1
+      ],
+      [
+        1,
+        3
+      ],
+      [
+        3,
+        0
+      ]
+    ]
+  },
+  {
+    "name": "Ursa Major",
+    "stars": [
+      {
+        "id": "dubhe",
+        "ra_hours": 11.0621,
+        "dec_deg": 61.75
+      },
+      {
+        "id": "merak",
+        "ra_hours": 11.0307,
+        "dec_deg": 56.38
+      },
+      {
+        "id": "phecda",
+        "ra_hours": 11.8692,
+        "dec_deg": 53.69
+      },
+      {
+        "id": "megrez",
+        "ra_hours": 12.2587,
+        "dec_deg": 57.03
+      },
+      {
+        "id": "alioth",
+        "ra_hours": 12.9006,
+        "dec_deg": 55.96
+      },
+      {
+        "id": "mizar",
+        "ra_hours": 13.3664,
+        "dec_deg": 54.93
+      },
+      {
+        "id": "alkaid",
+        "ra_hours": 13.7926,
+        "dec_deg": 49.31
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        5
+      ],
+      [
+        5,
+        6
+      ]
+    ]
+  }
+]
